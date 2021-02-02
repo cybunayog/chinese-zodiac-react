@@ -1,0 +1,9 @@
+/*
+    Global styles for all components of the website.
+
+    index.css only pertains to index.js, which is the
+    entirety of the website.
+*/
+.home-bg {
+  width: 100%;
+}
