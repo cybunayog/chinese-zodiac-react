@@ -68,7 +68,7 @@ import Tiger from "../assets/images/zodiac-icons/tiger.png";
     },
     {
       photo: Dog,
-      text: "Rooster",
+      text: "Dog",
       year: ["1922", "1934", "1946", "1958", "1970", "1982", "1994", "2006", "2018"]
     },
     {
@@ -86,9 +86,13 @@ export default function Zodiac() {
         <ImageItem
           name={e.text}
           image={e.photo}
-          year={e.year}
         />
       )}
+      <div>
+        {zodiacIcons.map(e => {
+          return <p>{e.year}</p>
+        })}
+      </div>
     </div>
   );
 }

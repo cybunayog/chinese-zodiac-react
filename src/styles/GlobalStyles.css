@@ -8,8 +8,14 @@
   width: 100%;
 }
 .image-item {
-  height: 50%;
-  width: 50%;
+
+}
+.image-item img {
+  height: 25%;
+  width: 25%;
+}
+.zodiac-container {
+  display: block;
 }
 
 /* Backdrop component */
