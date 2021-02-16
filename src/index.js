@@ -11,6 +11,7 @@ import { Home, ControlStructures } from 'modules/pages';
 import { Toolbar, SideDrawer, Backdrop } from "modules/components";
 // Import styles
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function App() {

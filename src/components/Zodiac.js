@@ -81,18 +81,13 @@ import Tiger from "../assets/images/zodiac-icons/tiger.png";
 export default function Zodiac() {
 
   return (
-    <div className="zodiac-container">
-      {zodiacIcons.map(e =>
-        <ImageItem
-          name={e.text}
-          image={e.photo}
-        />
-      )}
-      <div>
-        {zodiacIcons.map(e => {
-          return <p>{e.year}</p>
-        })}
-      </div>
+    <div className="grid">
+        {zodiacIcons.map(e =>
+      <ImageItem
+        name={e.text}
+        image={e.photo}
+      />
+    )}
     </div>
   );
 }

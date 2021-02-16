@@ -3,7 +3,7 @@ import { Zodiac } from 'modules/components';
 
 export default function ControlStructures() {
   return (
-    <div>
+    <div className="zodiac-container">
       <Zodiac />
     </div>
   )
