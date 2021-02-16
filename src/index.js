@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 // Import files
-import { Home, ControlStructures } from 'modules/pages';
+import { Home, ZodiacAnimals } from 'modules/pages';
 import { Toolbar, SideDrawer, Backdrop } from "modules/components";
 // Import styles
 import './index.css';
@@ -40,7 +40,7 @@ export default function App() {
       <main>
         <Switch>
           <Route exact={true} path="/" component={Home} />
-          <Route path="/control-structures" component={ControlStructures} />
+          <Route path="/zodiac-animals" component={ZodiacAnimals} />
           <Route render={() => <div style={{ padding: "100px 100px 0px 0px" }}><h1>404: Page not found</h1></div>} />
         </Switch>
       </main>

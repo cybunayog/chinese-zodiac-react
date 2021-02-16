@@ -1,7 +1,7 @@
 import Home from 'pages/Home';
-import ControlStructures from 'pages/ControlStructures';
+import ZodiacAnimals from 'pages/ZodiacAnimals';
 
 export {
   Home,
-  ControlStructures
+  ZodiacAnimals
 };
