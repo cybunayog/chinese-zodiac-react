@@ -1,0 +1,11 @@
+- Fix Zodiac Animal Cards
+- Create Dynamic pages for Zodiac animals
+- Create a page for user to know their zodiac animal based on year
+- fix css styles at homepage
+- set up mongodb
+  - create objects for zodiac animals 
+    - name
+    - years
+    - description
+- testing commits
+  
