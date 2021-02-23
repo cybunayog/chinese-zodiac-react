@@ -1,3 +1,3 @@
 #chinese-zodiac-react
 
-#MEAN Stack
+#MERN Stack
