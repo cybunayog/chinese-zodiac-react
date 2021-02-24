@@ -7,6 +7,10 @@
 .home-bg {
   width: 100%;
 }
+.home-content-title {
+  margin-top: 6rem;
+  text-align: center;
+}
 .zodiac-container {
   margin-top: 5.5rem;
 }
@@ -159,3 +163,7 @@
   }
 }
 /* End of Toolbar */
+
+.zodiac-animal-info-container {
+  margin-top: 5.5rem;
+}

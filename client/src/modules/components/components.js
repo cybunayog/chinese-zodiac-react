@@ -6,7 +6,7 @@ import SideDrawer from 'components/SideDrawer';
 import Backdrop from 'components/Backdrop';
 import DrawerToggleButton from 'components/DrawerToggleButton';
 import Toolbar from 'components/Toolbar';
-import ImageItem from 'components/ImageItem';
+import CardItem from 'components/CardItem';
 
 export {
   HomeContent,
@@ -17,5 +17,5 @@ export {
   Backdrop,
   DrawerToggleButton,
   Toolbar,
-  ImageItem
+  CardItem
 };
