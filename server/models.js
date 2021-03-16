@@ -4,7 +4,6 @@ const usersSchema = mongoose.Schema({
   username: String,
   password: String,
   cakeDay: Date,
-  id: String
 });
 
 
