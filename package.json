@@ -2,6 +2,7 @@
   "name": "chinese-zodiac-react",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.4",
@@ -18,11 +19,13 @@
     "react-scripts": "^4.0.1",
     "react-table": "^7.6.3",
     "styled-components": "^5.2.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yarn": "^1.22.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-client": "react-scripts start",
+    "start": "cd server && yarn start",
+    "build": "react-scripts build && (cd server && yarn install)",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
