@@ -85,6 +85,7 @@ app.use((req, res) => {
 });
 
 app.use(router);
+app.use(express.static(buildPath));
 
 // Testing endpoints
 app.get("/ping", (req, res) => {
