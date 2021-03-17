@@ -1,23 +1,22 @@
 const router = require('express').Router();
-const moment = require('moment');
-const { users } = require('../models.js');
+const { User } = require('../models/UserModel.js');
 
-router.get("/signup", (req, res) => {
-  // gets sign up page
-  res.sendFile();
+// Routes
+router.post('/signup', (req, res) => {
+  // save user to db
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password
+  }).save((err, res) => {
+    if (err) res.status(400).send(err);
+    res.status(200).send(response);
+  });
 });
 
-router.post("/signup", (req, res) => {
-  // save user
 
-});
-
-router.get('/login', (req, res) => {
-  // gets login page
-
-});
-
-router.post("/login", (req, res) => {
+router.post('/login', (req, res) => {
   // logs user in
 
 });
+
+module.exports = router;

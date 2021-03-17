@@ -1,3 +1,4 @@
-#chinese-zodiac-react
+# chinese-zodiac-react
 
-#MERN Stack
+## MERN Stack Development
+> MongoDB, Express, React.js, Node.js

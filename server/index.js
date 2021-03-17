@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const env = require('./env.js');
+const router = require('./routes/user.js');
 const app = express();
 
 const mongoConnect = env.mongoUrl;
@@ -75,6 +76,13 @@ app.use((req, res) => {
   }
 
   res.type('txt').send('Page not found');
+});
+
+app.use(router);
+
+// Testing endpoints
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
 });
 
 app.listen(3000, () => {

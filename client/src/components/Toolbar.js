@@ -6,6 +6,7 @@ import { DrawerToggleButton } from 'modules/components';
 
 // Import Styles
 import 'styles/GlobalStyles.css';
+import HomeIcon from "../assets/images/home.png";
 
 export default function Toolbar(props) {
     return (
@@ -15,7 +16,7 @@ export default function Toolbar(props) {
                     <DrawerToggleButton click={props.drawerClickHandler}/>
                 </div>
                 <div className="toolbar_logo">
-                    {/* <img src="/images/logo/cnciLogo.jpg" title="CNCI Logo" />--> */}
+                    <img src={HomeIcon} title="Home" />
                 </div>
                 <div className="spacer" />
                 <div className="toolbar_navigation-items">
