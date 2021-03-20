@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const morgan = require('morgan');
 const mongoose = require("mongoose");
-const { authRoute, apiRoute } = require(".");
+const { authRoute, apiRoute } = require("./routes");
 const app = express();
 
 const mongoConnect = process.env.MONGO_URL;
@@ -24,6 +24,10 @@ mongoose.connect(mongoConnect, {
   useUnifiedTopology: true,
 }).catch(e => {
   console.error('Error on connecting mongoose: ', e);
+});
+
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose is connected!!');
 });
 
 // Data parsing
