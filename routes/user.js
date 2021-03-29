@@ -60,7 +60,7 @@ router.post('/login', (req, res) => {
           // Authenticate user
           res.status(200).json({
             userId: user._id,
-            token: 'token'
+            token
           });
         })
         .catch(e => {
