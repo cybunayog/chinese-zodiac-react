@@ -99,7 +99,7 @@
   left: 0;
   background:#DADADA;
   height: 90px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .toolbar_navigation {

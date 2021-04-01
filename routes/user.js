@@ -17,26 +17,33 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  // using bcrypt to randomize user credentials
-  bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-      // save user to db
-      const user = new User({
+
+  // Check if user exists
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (user) {
+        return res.status(400).json({ email: "Email already exists!" });
+      } else {
+        const newUser = new User({
         email: req.body.email,
-        password: hash
-      })
-        .save()
-        .then(() => {
-          res.status(201).json({
-            message: 'User added successfully!'
-          });
-          // log user in
-        });
-    })
-    .catch(e => {
-      res.status(400).json({
-        error: e
+        password: req.body.password
       });
+
+      // using bcrypt to randomize user credentials
+      bcrypt.hash(newUser.password, 10)
+        .then(hash => {
+          // save user to db
+          newUser.password = hash;
+          newUser
+          .save()
+          .then(user => res.json(user));
+        })
+        .catch(e => {
+          res.status(400).json({
+            error: e
+          });
+        });
+      }
     });
   }
 );
@@ -47,13 +54,13 @@ router.post('/login', (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       // Check if there's no user
-      if (!user) return res.status(401).json({ error: new Error('User not found! Perhaps sign up?') });
+      if (!user) return res.status(401).json({ error: 'User not found! Perhaps sign up?' });
 
       // If there is a user, compare the passwords and authenticate
       bcrypt.compare(req.body.password, user.password)
         .then(valid => {
           // Check if password is not valid
-          if (!valid) return res.status(401).json({ error: new Error('Password is incorrect!') });
+          if (!valid) return res.status(401).json({ error: 'Password is incorrect!' });
 
           // Create JWT
           const token = jwt.sign({ userId: user._id }, process.env.AUTH_STRING, { expiresIn: '24hr' } );

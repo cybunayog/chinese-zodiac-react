@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -7,8 +7,16 @@ import {
 } from 'react-router-dom';
 
 // Import files
-import { Home, ZodiacAnimals, WhatIsYourZodiac, ZodiacAnimalInfo } from 'modules/pages';
+import {
+  Home,
+  ZodiacAnimals,
+  WhatIsYourZodiac,
+  SignUp,
+  ZodiacTest,
+  Login
+} from 'modules/pages';
 import { Toolbar, SideDrawer, Backdrop } from "modules/components";
+  
 // Import styles
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,21 +39,26 @@ export default function App() {
   if (sideDrawerOpen) {
     backdrop = <Backdrop click={backdropClickHandler}/>;
   }
+  
+  // USE SESSIONS/REDUX TO HIDE CERTAIN FEATURES
 
   return (
-    <div className="App">
+      <div className="App">
       <Toolbar drawerClickHandler={drawerToggleClickHandler} />
       <SideDrawer show={sideDrawerOpen}/>
       {backdrop}
-      <main>
-        <Switch>
-          <Route exact={true} path="/" component={Home} />
-          <Route path="/zodiac-animals" component={ZodiacAnimals} />
-          <Route path={["/zodiac-animal-info", "/zodiac-animal-info/:id"]} component={ZodiacAnimalInfo} />
-          <Route render={() => <div style={{ padding: "100px 100px 0px 0px" }}><h1>404: Page not found</h1></div>} />
-        </Switch>
-      </main>
-    </div>
+        <main>
+          <Switch>
+            <Route exact={true} path="/" component={Home} />
+            <Route path="/zodiac-animals" component={ZodiacAnimals} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/what-is-your-zodiac" component={WhatIsYourZodiac} />
+            <Route path="/zodiac-test" component={ZodiacTest} />
+            <Route render={() => <div style={{ padding: "100px 100px 0px 0px" }}><h1>404: Page not found</h1></div>} />
+          </Switch>
+        </main>
+      </div>
   );
 }
 
