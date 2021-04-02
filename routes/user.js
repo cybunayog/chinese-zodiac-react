@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-
   // Check if user exists
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -34,9 +33,14 @@ router.post('/signup', (req, res) => {
         .then(hash => {
           // save user to db
           newUser.password = hash;
-          newUser
-          .save()
-          .then(user => res.json(user));
+          newUser.save()
+          .then(user => {
+            const token = jwt.sign({ userId: user._id }, process.env.AUTH_STRING, { expiresIn: '24hr' });
+            res.status(200).json({
+              userId: user._id,
+              token
+            });
+          });
         })
         .catch(e => {
           res.status(400).json({

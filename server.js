@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const morgan = require('morgan');
 const mongoose = require("mongoose");
-const { authRoute, apiRoute } = require("./routes");
+const { authRoute, apiRoute, testRoute } = require("./routes");
 const app = express();
 
 const mongoConnect = process.env.MONGO_URL;
@@ -37,9 +37,8 @@ app.use(express.urlencoded({ extended: false }));
 // HTTP request logger
 app.use(morgan('tiny'));
 app.use('/auth', authRoute);
-
-// TODO: uncomment when schema is figured out
-//app.use('/api', apiRoute);
+app.use('/test', testRoute)
+app.use('/api', apiRoute);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
