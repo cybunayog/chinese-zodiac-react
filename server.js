@@ -1,6 +1,7 @@
 require('dotenv').config();
 const path = require("path");
 const express = require("express");
+const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require("mongoose");
 const { authRoute, apiRoute, testRoute } = require("./routes");
@@ -22,6 +23,7 @@ if (!mongoConnect) {
 mongoose.connect(mongoConnect, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  userCreateIndex: true
 }).catch(e => {
   console.error('Error on connecting mongoose: ', e);
 });
@@ -33,6 +35,13 @@ mongoose.connection.on('connected', () => {
 // Data parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://chinese-zodiac-mern.herokuapp.com"
+  ],
+  credentials: true,
+}));
 
 // HTTP request logger
 app.use(morgan('tiny'));

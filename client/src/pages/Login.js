@@ -6,7 +6,6 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
-  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     // fetch('http://localhost:8080/auth/login')

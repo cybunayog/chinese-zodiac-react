@@ -5,6 +5,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import axios from 'axios';
 
 // Import files
 import {
@@ -21,6 +22,7 @@ import { Toolbar, SideDrawer, Backdrop } from "modules/components";
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+axios.defaults.withCredentials = true;
 
 export default function App() {
 
