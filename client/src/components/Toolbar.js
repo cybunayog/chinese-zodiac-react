@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Link
 } from 'react-router-dom';
-import { DrawerToggleButton } from 'modules/components';
 
 // Import Styles
 import 'styles/GlobalStyles.css';
@@ -12,9 +11,6 @@ export default function Toolbar(props) {
     return (
         <header className="toolbar">
             <nav className="toolbar_navigation">
-                <div className="toolbar_toggle-button">
-                    <DrawerToggleButton click={props.drawerClickHandler}/>
-                </div>
                 <div className="toolbar_logo">
                     <img src={HomeIcon} title="Home" />
                 </div>

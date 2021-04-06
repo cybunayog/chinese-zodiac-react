@@ -1,72 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
-import axios from 'axios';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
-// Import files
-import {
-  Home,
-  ZodiacAnimals,
-  WhatIsYourZodiac,
-  SignUp,
-  ZodiacTest,
-  Login
-} from 'modules/pages';
-import { Toolbar, SideDrawer, Backdrop } from "modules/components";
-  
+import { reducers } from 'reducers';
+
+import App from 'App';
+
 // Import styles
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-axios.defaults.withCredentials = true;
-
-export default function App() {
-
-  const [sideDrawerOpen, setSideDrawer] = useState(false);
-  
-  const drawerToggleClickHandler = () => {
-    return setSideDrawer(true);
-  };
-
-  const backdropClickHandler = () => {
-    return setSideDrawer(false);
-  };
-
-  let backdrop;
-  
-  if (sideDrawerOpen) {
-    backdrop = <Backdrop click={backdropClickHandler}/>;
-  }
-  
-  // USE SESSIONS/REDUX TO HIDE CERTAIN FEATURES
-
-  return (
-      <div className="App">
-      <Toolbar drawerClickHandler={drawerToggleClickHandler} />
-      <SideDrawer show={sideDrawerOpen}/>
-      {backdrop}
-        <main>
-          <Switch>
-            <Route exact={true} path="/" component={Home} />
-            <Route path="/zodiac-animals" component={ZodiacAnimals} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/what-is-your-zodiac" component={WhatIsYourZodiac} />
-            <Route path="/zodiac-test" component={ZodiacTest} />
-            <Route render={() => <div style={{ padding: "100px 100px 0px 0px" }}><h1>404: Page not found</h1></div>} />
-          </Switch>
-        </main>
-      </div>
-  );
-}
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+      <App />
+  </Provider>,
   document.getElementById('root')
 );
