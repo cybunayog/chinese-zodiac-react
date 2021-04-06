@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 
 // Import Styles
-import 'styles/GlobalStyles.css';
 import HomeIcon from "../assets/images/home.png";
 
 export default function Toolbar(props) {

@@ -2,7 +2,6 @@ import React from 'react';
 
 // Import Styles & images
 import 'styles/GlobalStyles.css'
-import style from 'styled-components';
 
 import image from '../assets/images/ChineseZodiacBanner.jpg';
 
