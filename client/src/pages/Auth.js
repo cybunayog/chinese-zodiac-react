@@ -29,11 +29,15 @@ export default function Auth() {
       dispatch(login(form, history));
     }
   };
-
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  
+  const handleChange = e => {
+    setForm({...form, [e.target.name]: e.target.value });
+    console.log(form);
+  };
 
   return (
-    <div className="login">
+    <div className="auth">
+      <h1>{ isSignup ? 'Sign Up' : 'Sign In'}</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>

@@ -209,10 +209,12 @@
   width: 100%;
 }
 
-.login, .signup {
-  margin-top: 100px;
+.auth {
+  margin-top: 200px;
   display: block;
-  width: 100%;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
   height: 100%;
-  align-content: center;
+  justify-content: center;
 }
