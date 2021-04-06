@@ -3,7 +3,6 @@ import {
     Link
 } from 'react-router-dom';
 
-// Import Styles
 import HomeIcon from "../assets/images/home.png";
 
 export default function Toolbar(props) {
@@ -18,6 +17,7 @@ export default function Toolbar(props) {
                     <ul>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/zodiac-animals">Zodiac Animals</Link></li>
+                        <li><Link to="/login">Login</Link></li>
                     </ul>
                 </div>
             </nav>
