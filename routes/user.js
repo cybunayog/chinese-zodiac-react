@@ -1,87 +1,151 @@
-require('dotenv').config();
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/UserModel');
 
-// Routes
-router.get('/', (req, res) => {
+// see users created in the db
+router.get('/users', (req, res) => {
   User.find({})
     .then(data => {
-      console.log('Data: ', data);
+      console.log('Users available in the db: ', data);
       res.json(data);
     })
     .catch(e => {
       console.log('error: ', e);
+      res.status(500).json({
+        errorMessage: e
+      });
     });
 });
 
-router.post('/signup', (req, res) => {
-  // Check if user exists
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      if (user) {
-        return res.status(400).json({ email: "Email already exists!" });
-      } else {
-        const newUser = new User({
-        email: req.body.email,
-        password: req.body.password
+// register
+router.post("/", async (req, res) => {
+  try {
+    const { email, password, passwordVerify } = req.body;
+
+    // validation
+    if (!email || !password || !passwordVerify)
+      return res
+        .status(400)
+        .json({ errorMessage: "Please enter all required fields." });
+
+    if (password.length < 6)
+      return res.status(400).json({
+        errorMessage: "Please enter a password of at least 6 characters.",
       });
 
-      // using bcrypt to randomize user credentials
-      bcrypt.hash(newUser.password, 10)
-        .then(hash => {
-          // save user to db
-          newUser.password = hash;
-          newUser.save()
-          .then(user => {
-            const token = jwt.sign({ userId: user._id }, process.env.AUTH_STRING, { expiresIn: '24hr' });
-            res.status(200).json({
-              userId: user._id,
-              token
-            });
-          });
-        })
-        .catch(e => {
-          res.status(400).json({
-            error: e
-          });
-        });
-      }
+    if (password !== passwordVerify)
+      return res.status(400).json({
+        errorMessage: "Please enter the same password twice.",
+      });
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser)
+      return res.status(400).json({
+        errorMessage: "An account with this email already exists.",
+      });
+
+    // hash the password
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    // save a new user account to the db
+    const newUser = new User({
+      email,
+      passwordHash,
     });
+
+    const savedUser = await newUser.save();
+
+    // sign the token
+    const token = jwt.sign(
+      {
+        user: savedUser._id,
+      },
+      process.env.AUTH_STRING
+    );
+
+    // send the token in a HTTP-only cookie
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        //secure: true,
+        sameSite: "none",
+      })
+      .send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
   }
-);
+});
 
+// log in
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log(email, password);
+    // validate
+    if (!email || !password)
+      return res
+        .status(400)
+        .json({ errorMessage: "Please enter all required fields." });
 
-router.post('/login', (req, res) => {
-  // logs user in
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      // Check if there's no user
-      if (!user) return res.status(401).json({ error: 'User not found! Perhaps sign up?' });
+    const existingUser = await User.findOne({ email });
+    if (!existingUser)
+      return res.status(401).json({ errorMessage: "Wrong email or password." });
 
-      // If there is a user, compare the passwords and authenticate
-      bcrypt.compare(req.body.password, user.password)
-        .then(valid => {
-          // Check if password is not valid
-          if (!valid) return res.status(401).json({ error: 'Password is incorrect!' });
+    const passwordCorrect = await bcrypt.compare(password, existingUser.passwordHash);
+    console.log(passwordCorrect);
 
-          // Create JWT
-          const token = jwt.sign({ userId: user._id }, process.env.AUTH_STRING, { expiresIn: '24hr' } );
-          // Authenticate user
-          res.status(200).json({
-            userId: user._id,
-            token
-          });
-        })
-        .catch(e => {
-          res.status(500).json({ error: e });
-        });
+    if (!passwordCorrect)
+      return res.status(401).json({ errorMessage: "Wrong email or password." });
+
+    // sign the token
+    const token = jwt.sign(
+      {
+        user: existingUser._id,
+      },
+      process.env.AUTH_STRING
+    );
+
+    // send the token in a HTTP-only cookie
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        //secure: true,
+        sameSite: "none",
+      })
+      .send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
+router.get("/logout", (req, res) => {
+  res
+    .cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      //secure: true,
+      sameSite: "none",
     })
-    .catch(e => {
-      res.status(500).json({ error: e });
-    });
+    .send();
+});
+
+router.get("/loggedIn", (req, res) => {
+  try {
+    const token = req.cookies.token;
+    console.log(req.cookies);
+    if (!token) return res.json(false);
+
+    jwt.verify(token, process.env.AUTH_STRING);
+
+    res.send(true);
+  } catch (err) {
+    res.json(false);
   }
-);
+});
+
 
 module.exports = router;

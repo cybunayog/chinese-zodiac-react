@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 
 const formSchema = mongoose.Schema({
   name: {
@@ -41,8 +40,6 @@ const formSchema = mongoose.Schema({
     type: String
   }
 });
-
-formSchema.plugin(uniqueValidator);
 
 module.exports = {
   Form: mongoose.model('Form', formSchema)

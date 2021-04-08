@@ -1,29 +1,18 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-// Tracks token
-module.exports = (req, res, next) => {
+function auth(req, res, next) {
   try {
-    //console.log(req.headers);
-    const token = req.headers.authorization.split(" ")[1];
-    console.log(token);
-    const isCustomAuth = token.length < 500;
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ errorMessage: "Unauthorized" });
 
-    let decodedData;
-
-    if (token && isCustomAuth) {
-      decodedData = jwt.verify(token, process.env.AUTH_STRING);
-
-      req.userId = decodedData?.id;
-    } else {
-      decodedData = jwt.decode(token);
-
-      req.userId = decodedData?.sub;
-    }
+    const verified = jwt.verify(token, process.env.AUTH_STRING);
+    req.user = verified.user;
 
     next();
-  } catch (e) {
-    console.error(e);
-    res.status(401).json({ error: new Error('Invalid request.') });
+  } catch (err) {
+    console.error(err);
+    res.status(401).json({ errorMessage: "Unauthorized" });
   }
-};
+}
+
+module.exports = auth;

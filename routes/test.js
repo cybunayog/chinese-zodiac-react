@@ -3,6 +3,7 @@ const auth = require('../middleware/auth');
 const { Test } = require('../models/TestModel');
 
 router.get("/", auth, (req, res) => {
+  console.log(auth);
   Test.find({})
     .then(data => {
       console.log('Test data: ', data);
