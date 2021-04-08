@@ -8,7 +8,7 @@ import {
 import {
   Home,
   ZodiacAnimals,
-  Auth
+  Register
 } from 'modules/pages';
 import { Toolbar } from "modules/components";
   
@@ -21,7 +21,7 @@ export default function App() {
           <Switch>
             <Route exact={true} path="/" component={Home} />
             <Route path="/zodiac-animals" component={ZodiacAnimals} />
-            <Route path="/login" component={Auth} />
+            <Route path="/register" component={Register} />
             <Route render={() => <div style={{ padding: "100px 100px 0px 0px" }}><h1>404: Page not found</h1></div>} />
       </Switch>
     </BrowserRouter>

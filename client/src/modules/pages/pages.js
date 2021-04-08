@@ -2,7 +2,7 @@ import Home from 'pages/Home';
 import ZodiacAnimals from 'pages/ZodiacAnimals';
 import ZodiacAnimalInfo from 'pages/ZodiacAnimalInfo';
 import WhatIsYourZodiac from 'pages/WhatIsYourZodiac';
-import Auth from 'pages/Auth';
+import Register from 'pages/Register';
 import ZodiacTest from 'pages/ZodiacTest';
 
 export {
@@ -10,6 +10,6 @@ export {
   ZodiacAnimals,
   ZodiacAnimalInfo,
   WhatIsYourZodiac,
-  Auth,
+  Register,
   ZodiacTest,
 };
