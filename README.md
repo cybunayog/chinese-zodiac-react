@@ -4,4 +4,5 @@
 > MongoDB, Express, React.js, Node.js
 
 ## Link to website
-The repo is deployed using [Heroku](https://chinese-zodiac-mern.herokuapp.com/)
+The repo is deployed using Heroku for the backend,
+and [Netlify](https://chinese-zodiac-mern.netlify.app) for the frontend.
