@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import AuthContext from 'context/AuthContext';
-import { apiUrl } from 'utils/constants';
+//import { apiUrl } from 'utils/constants';
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -21,8 +21,12 @@ export default function Register() {
       const registerData = {
         email, password, passwordVerify
       };
-      await axios.post(`${apiUrl}/auth/`, registerData, {
-        withCredentials: true
+      // await axios.post(`${apiUrl}/auth/`, registerData, {
+      //   withCredentials: true
+      // });
+
+      await axios.post(`/auth/`, registerData, {
+         withCredentials: true
       });
       await getLoggedIn();
       console.log("Registered!");

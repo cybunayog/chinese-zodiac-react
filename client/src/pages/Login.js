@@ -5,7 +5,7 @@ import axios from 'axios';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import AuthContext from 'context/AuthContext';
-import { apiUrl } from 'utils/constants';
+//import { apiUrl } from 'utils/constants';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,7 +20,10 @@ export default function Login() {
       const loginData = {
         email, password, 
       };
-      await axios.post(`${apiUrl}/auth/login`, loginData, {
+      // await axios.post(`${apiUrl}/auth/login`, loginData, {
+      //   withCredentials: true
+      // });
+      await axios.post(`/auth/login`, loginData, {
         withCredentials: true
       });
       await getLoggedIn();
