@@ -16,13 +16,12 @@ export default function Register() {
 
   const register = async e => {
     e.preventDefault();
-    
 
     try {
       const registerData = {
         email, password, passwordVerify
       };
-      await axios.post(`${apiUrl}}/auth/`, registerData, {
+      await axios.post(`${apiUrl}/auth/`, registerData, {
         withCredentials: true
       });
       await getLoggedIn();
