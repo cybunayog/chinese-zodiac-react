@@ -5,10 +5,10 @@
     entirety of the website.
 */
 .home-bg {
+  margin-top: 90px;
   width: 100%;
 }
 .home-content-title {
-  margin-top: 100px;
   text-align: center;
 }
 .zodiac-container {

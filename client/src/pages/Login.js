@@ -1,31 +1,29 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router';
+import axios from 'axios';
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import AuthContext from 'context/AuthContext';
 
-export default function Register() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState("");
   const { getLoggedIn } = useContext(AuthContext);
   const history = useHistory();
 
-  const register = async e => {
+  const login = async e => {
     e.preventDefault();
-    
 
     try {
-      const registerData = {
-        email, password, passwordVerify
+      const loginData = {
+        email, password, 
       };
-      await axios.post("http://localhost:8080/auth/", registerData, {
+      await axios.post("http://localhost:8080/auth/login", loginData, {
         withCredentials: true
       });
       await getLoggedIn();
-      console.log("Registered!");
+      console.log("Logged in!");
       history.push("/");
     } catch (err) {
       console.log(err);
@@ -34,7 +32,7 @@ export default function Register() {
 
   return (
     <div className="auth">
-      <Form onSubmit={register}>
+      <Form onSubmit={login}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -52,16 +50,8 @@ export default function Register() {
             onChange={e => setPassword(e.target.value)}
             />
         </Form.Group>
-        <Form.Group size="lg" controlId="passwordVerify">
-          <Form.Label>Verify Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={passwordVerify}
-            onChange={e => setPasswordVerify(e.target.value)}
-            />
-        </Form.Group>
         <Button block size="lg" type="submit">
-          Sign Up
+          Log In
         </Button>
       </Form>
     </div>

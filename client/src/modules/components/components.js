@@ -4,6 +4,8 @@ import Footer from 'components/Footer';
 import Zodiac from 'components/Zodiac';
 import Toolbar from 'components/Toolbar';
 import CardItem from 'components/CardItem';
+import Routes from 'components/Routes';
+import LogOutButton from 'components/LogOutButton';
 
 export {
   HomeContent,
@@ -11,5 +13,7 @@ export {
   Footer,
   Zodiac,
   Toolbar,
-  CardItem
+  CardItem,
+  Routes,
+  LogOutButton
 };
