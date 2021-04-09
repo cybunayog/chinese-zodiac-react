@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
-//import { apiUrl } from 'utils/constants';
+import { apiUrl } from 'utils/constants';
 
 const AuthContext = createContext();
 
@@ -9,7 +9,6 @@ function AuthContextProvider(props) {
 
   const getLoggedIn = async () => {
     const loggedInResp = await axios.get(`${apiUrl}/auth/loggedIn`);
-    const loggedInResp = await axios.get(`/auth/loggedIn`);
     setLoggedIn(loggedInResp.data);
   }
 
