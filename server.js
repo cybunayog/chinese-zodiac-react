@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: [
-    "http://localhost:3000",
-    "https://chinese-zodiac-mern.herokuapp.com"
+    process.env.DEV_URL,
+    process.env.PROD_URL
   ],
   credentials: true,
 }));

@@ -17,7 +17,8 @@
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server.js",
-    "client": "cd client && npm start"
+    "client": "cd client && npm start",
+    "deploy": "git push heroku main"
   },
   "author": "",
   "license": "ISC"

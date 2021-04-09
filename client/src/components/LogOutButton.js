@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import AuthContext from 'context/AuthContext';
 import { useHistory } from 'react-router';
+import { apiUrl } from 'utils/constants';
 
 export default function LogOutButton() {
 
@@ -12,7 +13,7 @@ export default function LogOutButton() {
 
   const logOut = async () => {
     // returns empty cookie
-    await axios.get("http://localhost:8080/auth/logout");
+    await axios.get(`${apiUrl}/auth/logout`);
     await getLoggedIn();
     history.push("/");
   };
