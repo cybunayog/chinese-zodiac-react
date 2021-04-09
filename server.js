@@ -51,6 +51,6 @@ app.use('/auth', authRoute);
 app.use('/test', testRoute)
 app.use('/api', apiRoute);
 
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('client/build'));
-// }
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
