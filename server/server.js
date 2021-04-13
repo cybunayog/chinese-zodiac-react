@@ -2,18 +2,14 @@ require('dotenv').config();
 const path = require("path");
 const express = require("express");
 const cors = require('cors');
+const logger = require('morgan');
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 const { authRoute, apiRoute, testRoute } = require("./routes");
 
 const app = express();
 const mongoConnect = process.env.MONGO_URL;
-
-const port = process.env.PORT || 8080;
-
-app.listen(port, () => {
-  console.log(`Server is live at ${port}`);
-});
+const port = process.env.NODE_ENV === 'development' ? 5000 : process.env.PORT;
 
 // Data parsing
 app.use(express.json());
@@ -26,6 +22,15 @@ app.use(cors({
   ],
   credentials: true,
 }));
+
+if (process.env.NODE_ENV !== 'production') app.use(logger('dev'));
+
+let url;
+url = process.env.NODE_ENV === 'development' ? process.env.API_DEV : process.env.API_PROD;
+
+app.listen(port, () => {
+  console.log(`Server is live at ${url}:${port}`);
+});
 
 // Check if mongo url is in the right environment
 if (!mongoConnect) {

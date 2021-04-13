@@ -23,7 +23,6 @@ export default function ZodiacAnimalInfo(props) {
     })
   }
 
-
   return (
     <div className="zodiac-animal-info-container">
       <img className="zodiac-animal-info-img" src={image} />

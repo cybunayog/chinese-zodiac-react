@@ -11,7 +11,6 @@ import {
   ZodiacAnimals,
   Register,
   Login,
-  WhatIsYourZodiac,
   ZodiacTest
 } from 'modules/pages';
 
@@ -37,12 +36,7 @@ export default function Routes() {
           )
         }
         {
-          loggedIn === true && (
-            <>
-              <Route path="/what-is-your-zodiac" component={WhatIsYourZodiac} />
-              <Route path="/zodiac-test" component={ZodiacTest} />
-            </>
-          )
+          loggedIn === true && <Route path="/zodiac-test" component={ZodiacTest} />
         }
         
         <Route render={() => <div style={{ padding: "100px 100px 0px 0px" }}><h1>404: Page not found</h1></div>} />
