@@ -2,10 +2,6 @@ const router = require('express').Router();
 const auth = require('../middleware/auth');
 const { Form } = require('../models/FormModel');
 
-
-// Make routes for user stuff
-
-//TODO: create a way to create, save, and display test results
 router.get('/form', auth, (req, res) => {
   Form.find({})
     .then(data => {
@@ -18,6 +14,7 @@ router.get('/form', auth, (req, res) => {
 });
 
 router.post('/form/submitted', auth, (req, res) => {
+  console.log(req);
   const form = new Form({
     name: req.body.name,
     email: req.body.email,
@@ -43,10 +40,6 @@ router.post('/form/submitted', auth, (req, res) => {
         error: e
       })
     });
-});
-
-router.delete('/form/:id', auth, (req, res) => {
-
 });
 
 module.exports = router;

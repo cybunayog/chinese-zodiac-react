@@ -13,7 +13,6 @@ const port = process.env.NODE_ENV === 'development' ? 5000 : process.env.PORT;
 
 // Data parsing
 app.use(express.json());
-app.use(cookieParser());
 app.use(cors({
   origin: [
     process.env.DEV_URL,
@@ -22,6 +21,7 @@ app.use(cors({
   ],
   credentials: true,
 }));
+app.use(cookieParser());
 
 if (process.env.NODE_ENV !== 'production') app.use(logger('dev'));
 

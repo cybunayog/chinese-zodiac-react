@@ -33,7 +33,6 @@ export default function Toolbar(props) {
                             <>
                                 <li><Link to="/zodiac-animals">Zodiac Animals</Link></li>
                                 <li><Link to="/zodiac-test">Zodiac Test</Link></li>
-                                <li><Link to="/what-is-your-zodiac">What's your Zodiac?</Link></li>
                                 <li><LogOutButton /></li>
                             </>
                         }

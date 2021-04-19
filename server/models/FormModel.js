@@ -13,7 +13,7 @@ const formSchema = mongoose.Schema({
     type: String
   },
   q2: {
-    type: Number
+    type: String
   },
   q3: {
     type: String

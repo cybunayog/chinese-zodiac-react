@@ -1,9 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Form, Button } from 'react-bootstrap';
 import AuthContext from 'context/AuthContext';
 import { apiUrl } from 'utils/constants';
 
