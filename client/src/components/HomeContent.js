@@ -1,6 +1,5 @@
 import React from 'react';
 import TextLoop from 'react-text-loop';
-import { Media } from 'react-bootstrap';
 
 // Import Styles & images
 import 'styles/GlobalStyles.css'

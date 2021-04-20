@@ -31,6 +31,7 @@ export default function Login() {
 
   return (
     <div className="auth">
+      <h1>Log In</h1>
       <Form onSubmit={login}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>

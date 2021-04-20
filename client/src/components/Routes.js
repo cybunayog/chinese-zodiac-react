@@ -14,7 +14,7 @@ import {
   ZodiacTest
 } from 'modules/pages';
 
-import { Toolbar } from 'modules/components';
+import { Toolbar, Footer } from 'modules/components';
 import AuthContext from 'context/AuthContext';
 
 export default function Routes() {
@@ -41,6 +41,7 @@ export default function Routes() {
         
         <Route render={() => <div style={{ padding: "100px 100px 0px 0px" }}><h1>404: Page not found</h1></div>} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

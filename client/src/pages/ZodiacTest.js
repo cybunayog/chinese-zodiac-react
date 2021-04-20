@@ -36,14 +36,6 @@ export default function ZodiacTest() {
     }
   }
 
-  const ThankYou = () => {
-    return (
-      <div className="form-completed">
-        <p>Thank you for filling this form!</p>
-      </div>
-    );
-  }
-
   return (
     <div className="form">
       <h1>Zodiac Test</h1>

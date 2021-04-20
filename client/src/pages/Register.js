@@ -32,6 +32,7 @@ export default function Register() {
 
   return (
     <div className="auth">
+      <h1>Register</h1>
       <Form onSubmit={register}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
