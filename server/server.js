@@ -14,19 +14,15 @@ const port = process.env.NODE_ENV === 'development' ? 5000 : process.env.PORT;
 // Data parsing
 app.use(express.json());
 app.use(cors({
-  origin: [
-    process.env.DEV_URL,
-    process.env.STAGING_URL,
-    process.env.PROD_URL
-  ],
-  credentials: true,
+  origin: [process.env.API_DEV, 'http://localhost:3000'],
+  credentials: true
 }));
 app.use(cookieParser());
 
 if (process.env.NODE_ENV !== 'production') app.use(logger('dev'));
 
 let url;
-url = process.env.NODE_ENV === 'development' ? process.env.API_DEV : process.env.API_PROD;
+url = process.env.API_DEV;
 
 app.listen(port, () => {
   console.log(`Server is live at ${url}:${port}`);
